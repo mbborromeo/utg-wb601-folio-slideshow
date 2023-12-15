@@ -81,14 +81,19 @@ function goToSlide(index) {
   }
 }
 
+function userActionGoToSlide(index) {
+  stopAutoScroll();
+  goToSlide(index);
+}
+
 function nextSlide(incrementValue) {
   const newIndex = slideIndex + incrementValue;
   goToSlide(newIndex);
 }
 
-function userActionNextSlide(plusOrMinusOne) {
+function userActionNextSlide(incrementValue) {
   stopAutoScroll();
-  nextSlide(plusOrMinusOne);
+  nextSlide(incrementValue);
 }
 
 function tryToStartSlider() {
@@ -169,7 +174,7 @@ function buildSlides(data) {
     span.className = "dot";
     span.onclick = function () {
       // anonymous function will only be called when event 'onclick' occurs
-      goToSlide(s);
+      userActionGoToSlide(s);
     };
     dotsParent.appendChild(span);
   }
