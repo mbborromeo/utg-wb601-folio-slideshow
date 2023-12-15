@@ -5,8 +5,15 @@ let slideIndex; // global variable for project slide
 let autoScroll = true; //set to false if you don't want to automatically scroll
 let autoScrollIntervalID = 0;
 
-const start = Date.now();
+let imagesLoadedCounter = 0;
+
+const startTime = Date.now();
 console.log("starting timer...");
+
+function outputTimeUntil(eventString) {
+  const millis = Date.now() - startTime;
+  console.log(`seconds until ${eventString} called/loaded: ${millis / 1000}`);
+}
 
 function stopAutoScroll() {
   autoScroll = false;
@@ -54,8 +61,7 @@ function showActiveDot() {
 }
 
 function goToSlide(index) {
-  const millis = Date.now() - start;
-  console.log(`seconds til goToSlide was called: ${millis / 1000}`);
+  outputTimeUntil("goToSlide");
 
   let slides = document.getElementsByClassName("slide");
 
@@ -103,8 +109,7 @@ function userActionNextSlide(incrementValue) {
 }
 
 function tryToStartSlider() {
-  const millis = Date.now() - start;
-  console.log(`seconds til tryToStartSlider was called: ${millis / 1000}`);
+  outputTimeUntil("tryToStartSlider");
 
   if (autoScroll) {
     // return value of setInterval() is an ID number of the timer that was set,
@@ -118,9 +123,20 @@ function tryToStartSlider() {
   }
 }
 
+// check when all slideshow images have been loaded, then auto-start slideshow
+function anImageLoadedCallback(numberOfImagesToLoad) {
+  imagesLoadedCounter++;
+  outputTimeUntil(`image #${imagesLoadedCounter}`);
+
+  // if all images have loaded
+  if (imagesLoadedCounter === numberOfImagesToLoad) {
+    console.log("ALL images have LOADED!");
+    tryToStartSlider();
+  }
+}
+
 function buildSlides(data) {
-  const millis = Date.now() - start;
-  console.log(`seconds til buildSlides was called: ${millis / 1000}`);
+  outputTimeUntil("buildSlides");
 
   // get HTML element that we will populate
   const slideshow = document.getElementById("slideshow");
@@ -135,6 +151,10 @@ function buildSlides(data) {
     slide.classList.add("slide", "fade");
 
     const image = document.createElement("img");
+    // event handler for when image has loaded
+    image.onload = function () {
+      anImageLoadedCallback(data.length);
+    };
     image.src = project.image;
     slide.appendChild(image);
 
@@ -190,6 +210,8 @@ function buildSlides(data) {
     };
     dotsParent.appendChild(dot);
   }
+
+  goToSlide(0);
 }
 
 // read JSON file
@@ -197,34 +219,27 @@ function buildSlides(data) {
 // which is why we have to use then()
 fetch("projects.json")
   .then(function (res) {
+    outputTimeUntil("fetched json");
+
     // console.log('res', res);
     const json = res.json(); // parse into JSON format
     // console.log('json', json);
     return json;
   })
   .then(function (data) {
+    outputTimeUntil("finished parsing json");
+
     buildSlides(data);
-    goToSlide(0);
-  })
-  .then(function () {
-    // is there another approach to adding another then for below?
-    // after the slides have been built, view the first project
-    // goToSlide(0);
-  })
-  .then(function () {
-    // setTimeout(tryToStartSlider, 3000);
   })
   .catch(function (error) {
     console.log("error", error);
   });
 
-// only trigger this when DOM has been loaded including images and CSS
-// https://javascript.info/onload-ondomcontentloaded
-// Is there a cross-browser approach for this for PC and Mac browsers?
-document.addEventListener("DOMContentLoaded", function () {
-  const millis = Date.now() - start;
-  console.log(`seconds til DOMContentLoaded: ${millis / 1000}`);
-
-  /* Only start slider if initially user has not pressed Next/Previous buttons within 3 seconds */
-  setTimeout(tryToStartSlider, 3000);
-});
+/* Doesn't seem to work...
+ * Only want to trigger this when page including images and CSS have been loaded.
+ * Q: Is there a cross-browser approach for this for PC and Mac browsers?
+ */
+// window.addEventListener("load", function () {
+//   outputTimeUntil('window loaded');
+//   tryToStartSlider();
+// });
