@@ -130,13 +130,13 @@ function buildSlides(data) {
     slideshow.appendChild(slide);
 
     // build dot indicators
-    const span = document.createElement("span");
-    span.className = "dot";
-    span.onclick = function () {
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    dot.onclick = function () {
       // anonymous function will only be called when event 'onclick' occurs
       goToSlide(s);
     };
-    dotsParent.appendChild(span);
+    dotsParent.appendChild(dot);
   }
 }
 
