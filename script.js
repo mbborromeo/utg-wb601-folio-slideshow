@@ -2,7 +2,6 @@
  * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow
  */
 let slideIndex; // global variable for project slide
-const autoScrollIsRunning = true; //set to false if you don't want to automatically scroll
 
 function updatePreviousNextButtons(slidesLength) {
   const buttonPrevious = document.getElementById("btn-prev");
@@ -11,10 +10,12 @@ function updatePreviousNextButtons(slidesLength) {
   buttonPrevious.classList.remove("disabled");
   buttonNext.classList.remove("disabled");
 
+  // if on first slide
   if (slideIndex == 0) {
     buttonPrevious.classList.add("disabled");
   }
 
+  // if on last slide
   if (slideIndex == slidesLength - 1) {
     buttonNext.classList.add("disabled");
   }
@@ -69,8 +70,6 @@ function nextSlide(incrementValue) {
 }
 
 function buildSlides(data) {
-  console.log("buildSlides slideIndex", slideIndex);
-
   // get HTML element that we will populate
   const slideshow = document.getElementById("slideshow");
   const dotsParent = document.getElementById("dots");
@@ -152,7 +151,6 @@ fetch("projects.json")
     return json;
   })
   .then(function (data) {
-    console.log("data", data);
     buildSlides(data);
   })
   .then(function () {
@@ -170,4 +168,3 @@ fetch("projects.json")
 // document.addEventListener("DOMContentLoaded", function () {
 //   goToSlide(slideIndex) }
 // );
-
