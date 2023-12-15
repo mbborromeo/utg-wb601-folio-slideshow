@@ -171,9 +171,8 @@ footer {
 }
 
 .slide {
-  /* initially set this to none, so in JS we can set the current slide to flex */
+  /* initially set this to none.  In JS we set current slide to block */
   display: none;
-  border: 1px solid red;
   position: relative;
   
   width: 100%;
@@ -184,18 +183,16 @@ footer {
   width: 50%;
   height: 100%;
   vertical-align: middle;
-
   position: absolute;
   left: 0;
 
-  /* mobile view */
   @media (max-width: 767px) {
     width: 100%;
   }
 }
 
 /* new */
-.text-background, .text-container {
+.text-container, .text-background {
   position: absolute;
   right: 0;
 
@@ -207,16 +204,6 @@ footer {
   }
 }
 
-.text-background {
-  background-color: black;
-  z-index: 1;
-
-  @media (max-width: 767px) {
-    opacity: 0.5;
-  }
-}
-
-/* .slide .text-container { */
 .text-container {
   color: #f2f2f2;
   font-size: 15px;
@@ -226,6 +213,15 @@ footer {
   align-items: center;
 
   z-index: 2;
+}
+
+.text-background {
+  background-color: black;
+  z-index: 1;
+
+  @media (max-width: 767px) {
+    opacity: 0.5;
+  }
 }
 
 .numbertext {
