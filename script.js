@@ -2,7 +2,7 @@
  * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow
  */
 let slideIndex; // global variable for project slide
-// const autoPlay = 1; // 0 for no, 1 for yes
+const autoScrollIsRunning = true; //set to false if you don't want to automatically scroll
 
 function updatePreviousNextButtons(slidesLength) {
   const buttonPrevious = document.getElementById("btn-prev");
@@ -55,7 +55,6 @@ function goToSlide(index) {
     }
 
     // show active slide
-    // slides[slideIndex].style.display = "flex";
     slides[slideIndex].style.display = "block";
 
     showActiveDot();
@@ -88,7 +87,6 @@ function buildSlides(data) {
     image.src = project.image;
     slide.appendChild(image);
 
-    /* new */
     const textBackground = document.createElement("div");
     textBackground.className = "text-background";
     slide.appendChild(textBackground);
