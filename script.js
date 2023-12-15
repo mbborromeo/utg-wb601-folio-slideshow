@@ -2,7 +2,17 @@
  * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow
  */
 let slideIndex; // global variable for project slide
-const autoScrollIsRunning = true; //set to false if you don't want to automatically scroll
+let autoScroll = true; //set to false if you don't want to automatically scroll
+let autoScrollIntervalID = 0;
+
+function stopAutoScroll() {
+  autoScroll = false;
+  clearInterval(autoScrollIntervalID); //stop auto slider
+}
+
+function rewindSlider() {
+  goToSlide(0); // to do: discuss function 'hoisting', since goToSlide() is defined later
+}
 
 function updatePreviousNextButtons(slidesLength) {
   const buttonPrevious = document.getElementById("btn-prev");
@@ -11,12 +21,20 @@ function updatePreviousNextButtons(slidesLength) {
   buttonPrevious.classList.remove("disabled");
   buttonNext.classList.remove("disabled");
 
+  // if on first slide
   if (slideIndex == 0) {
     buttonPrevious.classList.add("disabled");
   }
 
+  // if on last slide
   if (slideIndex == slidesLength - 1) {
     buttonNext.classList.add("disabled");
+
+    // and if auto scroll is running, rewind the slider after 4 seconds
+    if (autoScroll) {
+      stopAutoScroll();
+      setTimeout(rewindSlider, 4000);
+    }
   }
 }
 
@@ -68,9 +86,25 @@ function nextSlide(incrementValue) {
   goToSlide(newIndex);
 }
 
-function buildSlides(data) {
-  console.log("buildSlides slideIndex", slideIndex);
+function userActionNextSlide(plusOrMinusOne) {
+  stopAutoScroll();
+  nextSlide(plusOrMinusOne);
+}
 
+function tryToStartSlider() {
+  if (autoScroll) {
+    // return value of setInterval() is an ID number of the timer that was set,
+    // so you can use clearInterval() to cancel that specific timer.
+    autoScrollIntervalID = setInterval(
+      function () {
+        nextSlide(1);
+      },
+      4000 // run at intervals of 4 seconds
+    );
+  }
+}
+
+function buildSlides(data) {
   // get HTML element that we will populate
   const slideshow = document.getElementById("slideshow");
   const dotsParent = document.getElementById("dots");
@@ -152,7 +186,7 @@ fetch("projects.json")
     return json;
   })
   .then(function (data) {
-    console.log("data", data);
+    // console.log("data", data);
     buildSlides(data);
   })
   .then(function () {
@@ -167,7 +201,7 @@ fetch("projects.json")
 // only trigger this when DOM has been loaded including images and CSS
 // https://javascript.info/onload-ondomcontentloaded
 // Is there a cross-browser approach for this for PC and Mac browsers?
-// document.addEventListener("DOMContentLoaded", function () {
-//   goToSlide(slideIndex) }
-// );
-
+document.addEventListener("DOMContentLoaded", function () {
+  /* Only start slider if initially user has not pressed Next/Previous buttons within 3 seconds */
+  setTimeout(tryToStartSlider, 3000);
+});
