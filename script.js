@@ -5,6 +5,9 @@ let slideIndex; // global variable for project slide
 let autoScroll = true; //set to false if you don't want to automatically scroll
 let autoScrollIntervalID = 0;
 
+const start = Date.now();
+console.log("starting timer...");
+
 function stopAutoScroll() {
   autoScroll = false;
   clearInterval(autoScrollIntervalID); //stop auto slider
@@ -51,6 +54,9 @@ function showActiveDot() {
 }
 
 function goToSlide(index) {
+  const millis = Date.now() - start;
+  console.log(`seconds til goToSlide was called: ${millis / 1000}`);
+
   let slides = document.getElementsByClassName("slide");
 
   /*
@@ -92,6 +98,9 @@ function userActionNextSlide(plusOrMinusOne) {
 }
 
 function tryToStartSlider() {
+  const millis = Date.now() - start;
+  console.log(`seconds til tryToStartSlider was called: ${millis / 1000}`);
+
   if (autoScroll) {
     // return value of setInterval() is an ID number of the timer that was set,
     // so you can use clearInterval() to cancel that specific timer.
@@ -105,6 +114,9 @@ function tryToStartSlider() {
 }
 
 function buildSlides(data) {
+  const millis = Date.now() - start;
+  console.log(`seconds til buildSlides was called: ${millis / 1000}`);
+
   // get HTML element that we will populate
   const slideshow = document.getElementById("slideshow");
   const dotsParent = document.getElementById("dots");
@@ -187,11 +199,15 @@ fetch("projects.json")
   })
   .then(function (data) {
     buildSlides(data);
+    goToSlide(0);
   })
   .then(function () {
     // is there another approach to adding another then for below?
     // after the slides have been built, view the first project
-    goToSlide(0);
+    // goToSlide(0);
+  })
+  .then(function () {
+    // setTimeout(tryToStartSlider, 3000);
   })
   .catch(function (error) {
     console.log("error", error);
@@ -201,6 +217,9 @@ fetch("projects.json")
 // https://javascript.info/onload-ondomcontentloaded
 // Is there a cross-browser approach for this for PC and Mac browsers?
 document.addEventListener("DOMContentLoaded", function () {
+  const millis = Date.now() - start;
+  console.log(`seconds til DOMContentLoaded: ${millis / 1000}`);
+
   /* Only start slider if initially user has not pressed Next/Previous buttons within 3 seconds */
   setTimeout(tryToStartSlider, 3000);
 });
