@@ -137,10 +137,7 @@ footer {
   opacity: 0;
 }
 
-.thumbnails a div {
-  /* border: 1px solid red; */
-  /* background-color: yellow; */
-  
+.thumbnails a div {  
   width: 100%;
   height: 100%;
 
@@ -191,7 +188,6 @@ footer {
   }
 }
 
-/* new */
 .text-container, .text-background {
   position: absolute;
   right: 0;
@@ -277,7 +273,6 @@ footer {
 .btn {
   cursor: pointer;
   position: absolute;
-  /* edit */
   z-index: 10; /* layer on top */
   text-decoration: none; /* remove link underline */
   top: 50%;
