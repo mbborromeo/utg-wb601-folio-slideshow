@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Michael's portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  
+  <body>    
+    <header>
+      <nav>        
+        <ul>
+          <li class="on"><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>    
+
+    <!-- Slideshow source:
+         https://www.w3schools.com/howto/howto_js_slideshow.asp
+    -->
+    
+    <h1>Home</h1>
+
+    <div id="slideshow">
+      <a href="#" onclick="nextSlide(-1)" title="Previous" class="btn" id="btn-prev">&#8592</a>
+      <a href="#" onclick="nextSlide(1)" title="Next" class="btn" id="btn-next">&#8594</a>
+    </div>
+
+    <div id="dots"></div>
+
+    
+    <!-- <footer>
+      <a href="#top">Back to top &uarr;</a>
+    </footer> -->
+
+    <script src="script.js"></script>
+  </body>
+</html>

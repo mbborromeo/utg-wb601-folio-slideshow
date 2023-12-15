@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Restaurant Website",
+    "description": "Mobile-responsive website",
+    "image": "images/screenshot_restaurant.png",
+    "url": "https://replit.com/@MichaelBorromeo/RestaurantWebsite",
+    "technologies": [
+      "HTML",
+      "CSS"
+    ]
+  },
+  {
+    "title": "Tic Tac Toe",
+    "description": "2-player web browser game",
+    "image": "images/screenshot_ticTacToe.png",
+    "url": "https://replit.com/@MichaelBorromeo/Tic-Tac-Toe",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JS"
+    ]
+  },
+  {
+    "title": "Trivia Quiz",
+    "description": "Online quiz game with score and restart",
+    "image": "images/icons8-close.png",
+    "url": "https://replit.com/@MichaelBorromeo/Interactive-QuizTrivia-site",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JS"
+    ]
+  }
+]

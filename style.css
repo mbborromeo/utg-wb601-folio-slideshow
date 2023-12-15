@@ -1,0 +1,330 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 26px;
+} 
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 17px;
+}
+
+h1, h2, h3, h4 {
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+header {
+  border: 1px solid black;
+}
+
+nav {
+  background-color: #999;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;  
+}
+
+nav ul li a {
+  display: block;
+  padding: 14px;
+  background-color: lightgrey;
+}
+
+nav ul li a:hover {
+  background-color: yellow;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.greenStyle {
+  color: green;
+}
+
+.redStyle {
+  color: red;
+}
+
+nav ul li.on a {
+  pointer-events: none;
+  text-decoration: none;
+  background-color: yellow;
+  color: black;
+}
+
+ul li {
+  color: green;
+}
+
+ul li.testClass {
+  color: yellow;
+}
+
+ul li#testId {
+  color: pink;
+}
+
+footer {
+  margin-top: 50px;
+  border-top: 1px solid black;
+}
+
+.thumbnails {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+
+.thumbnails a {
+  background-color: #CCC;
+  color: #000;
+  display: block;
+  width: 31%;
+  height: 160px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.75s, color 0.5s;
+
+  /* hide image if bigger than width/height */
+  /* overflow: hidden;  */
+  position: relative; /* so img and div can layered */
+}
+
+.thumbnails a:hover {
+  background-color: #000;
+  color: #FFF;
+}
+
+.thumbnails a img {
+  width: 100%; /* relative to parent container */
+  height: 100%; /* relative to parent container */
+  object-fit: cover; /* cover dimensions while keeping proportion */
+  opacity: 0.4;
+  /* transition: opacity 0.75s; */
+}
+
+.thumbnails a:hover img {
+  opacity: 0;
+}
+
+.thumbnails a div {
+  /* border: 1px solid red; */
+  /* background-color: yellow; */
+  
+  width: 100%;
+  height: 100%;
+
+  /* layer on top of img */
+  position: absolute;
+  top: 0;
+  z-index: 2;  
+}
+
+.thumbnails a div h3 {
+  padding-top: 30px;
+}
+
+
+/* Slideshow source: 
+ * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow
+ */
+
+/* Slide show styles */
+* {
+  box-sizing: border-box;
+}
+
+#slideshow {
+  width: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.slide {
+  /* initially set this to none, so in JS we can set the current slide to flex */
+  display: none;
+  border: 1px solid red;
+  position: relative;
+  
+  width: 100%;
+  height: 400px;
+}
+
+.slide img {
+  width: 50%;
+  height: 100%;
+  vertical-align: middle;
+
+  position: absolute;
+  left: 0;
+
+  /* mobile view */
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+/* new */
+.text-background, .text-container {
+  position: absolute;
+  right: 0;
+
+  width: 50%;
+  height: 100%;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.text-background {
+  background-color: black;
+  z-index: 1;
+
+  @media (max-width: 767px) {
+    opacity: 0.5;
+  }
+}
+
+/* .slide .text-container { */
+.text-container {
+  color: #f2f2f2;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2;
+}
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.technologies {
+  color: #CCC;
+}
+
+.link {
+  border: 1px solid white;
+  color: white;
+  text-decoration: none;
+  padding: 4px 16px;
+  margin-top: 20px;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* The dots/bullets/indicators */
+#dots {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active, .dot:hover {
+  background-color: #717171;
+}
+
+.dot.active {
+  cursor: default;
+  pointer-events: none;
+}
+
+.btn {
+  cursor: pointer;
+  position: absolute;
+  /* edit */
+  z-index: 10; /* layer on top */
+  text-decoration: none; /* remove link underline */
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+#btn-next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.btn:hover {
+  background-color: rgba(255,255,255,0.33);
+}
+
+.btn.disabled {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0;
+}
+
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next, .text-container {font-size: 11px}
+}
