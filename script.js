@@ -186,7 +186,6 @@ fetch("projects.json")
     return json;
   })
   .then(function (data) {
-    // console.log("data", data);
     buildSlides(data);
   })
   .then(function () {
