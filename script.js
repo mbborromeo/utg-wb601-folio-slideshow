@@ -2,8 +2,8 @@
  * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_slideshow
  */
 let slideIndex; // global variable for project slide
-let autoScroll = true; //set to false if you don't want to automatically scroll
-let autoScrollIntervalID = 0;
+let autoSlide = true; //set to false if you don't want to automatically scroll
+let autoSlideIntervalID = 0;
 
 let imagesLoadedCounter = 0;
 
@@ -16,8 +16,8 @@ function outputTimeUntil(eventString) {
 }
 
 function stopAutoScroll() {
-  autoScroll = false;
-  clearInterval(autoScrollIntervalID); //stop auto slider
+  autoSlide = false;
+  clearInterval(autoSlideIntervalID); //stop auto slider
 }
 
 function rewindSlider() {
@@ -41,7 +41,7 @@ function updatePreviousNextButtons(slidesLength) {
     buttonNext.classList.add("disabled");
 
     // and if auto scroll is running, rewind the slider after 4 seconds
-    if (autoScroll) {
+    if (autoSlide) {
       stopAutoScroll();
       setTimeout(rewindSlider, 4000);
     }
@@ -111,10 +111,10 @@ function userActionNextSlide(incrementValue) {
 function tryToStartSlider() {
   outputTimeUntil("tryToStartSlider");
 
-  if (autoScroll) {
+  if (autoSlide) {
     // return value of setInterval() is an ID number of the timer that was set,
     // so you can use clearInterval() to cancel that specific timer.
-    autoScrollIntervalID = setInterval(
+    autoSlideIntervalID = setInterval(
       function () {
         nextSlide(1);
       },
@@ -229,6 +229,7 @@ fetch("projects.json")
 
     buildSlides(data);
     goToSlide(0);
+    // setTimeout(tryToStartSlider, 2000);
   })
   .catch(function (error) {
     console.log("error", error);
@@ -239,7 +240,7 @@ fetch("projects.json")
  * Q: Is there a cross-browser approach for this for PC and Mac browsers?
  */
 // window.addEventListener("load", function () {
-//   outputTimeUntil('window loaded');
+//   outputTimeUntil("window loaded");
 //   /* auto-start slider 2 seconds after the website has finished loading */
-// setTimeout(tryToStartSlider, 2000);
+//   setTimeout(tryToStartSlider, 2000);
 // });
