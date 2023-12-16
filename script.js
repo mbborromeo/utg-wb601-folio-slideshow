@@ -240,5 +240,6 @@ fetch("projects.json")
  */
 // window.addEventListener("load", function () {
 //   outputTimeUntil('window loaded');
-//   tryToStartSlider();
+//   /* auto-start slider 2 seconds after the website has finished loading */
+// setTimeout(tryToStartSlider, 2000);
 // });
