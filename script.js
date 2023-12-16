@@ -210,8 +210,6 @@ function buildSlides(data) {
     };
     dotsParent.appendChild(dot);
   }
-
-  goToSlide(0);
 }
 
 // read JSON file
@@ -230,6 +228,7 @@ fetch("projects.json")
     outputTimeUntil("finished parsing json");
 
     buildSlides(data);
+    goToSlide(0);
   })
   .catch(function (error) {
     console.log("error", error);
